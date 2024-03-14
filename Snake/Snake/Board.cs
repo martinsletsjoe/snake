@@ -1,25 +1,13 @@
-﻿//namespace Snake;
+﻿namespace Snake;
 
-//public class Board
-//{
-//    public int width;
-//    public int height;
+public class Board
+{
+    public int Width;
+    public int Height;
 
-//    public Board()
-//    {
-//        this.width = 50;
-
-//        this.height = width / 2; ;
-
-//    }
-
-//    public int getWidth()
-//    {
-//        return width;
-//    }
-
-//    public int getHeight()
-//    {
-//        return height;
-//    }
-//}
+    public Board()
+    {
+        Height = 30;
+        Width = Height * 2;
+    }
+}
