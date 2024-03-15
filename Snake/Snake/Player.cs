@@ -4,57 +4,62 @@ namespace Snake;
 
 public class Player
 {
-    private readonly char _form;
+    private readonly char _head;
     public int PositionY;
     public int PositionX;
     private int _length;
     private Direction _currentDirection;
+    private Queue<(int, int)> _bodyPositions;
 
     public Player()
     {
         PositionX = 20;
         PositionY = 20;
-        _form = 'X';
-        _length = 8;
+        _head = '0';
+        _length = 2;
         _currentDirection = Direction.Right;
-    }
+        _bodyPositions = new Queue<(int, int)>();
 
-
-    public void Show(int width, int height)
-    {
         for (int i = 0; i < _length; i++)
         {
-            int effectiveX = (PositionX + i) % width;
-
-            Console.SetCursorPosition(effectiveX, PositionY);
-            Console.Write(_form);
+            _bodyPositions.Enqueue((PositionX-i, PositionY));
         }
-
-        Move(width, height);
     }
 
-    public void ChangeDirection(Direction newDirection)
+
+    public void Show()
     {
-        _currentDirection = newDirection;
+        foreach (var (x,y) in _bodyPositions)
+        {
+            Console.SetCursorPosition(x % Console.WindowWidth, y);
+            Console.Write(_head);
+        }
     }
+
+
 
     public void Move(int width, int height)
     {
+        int nextX = PositionX, nextY = PositionY;
         switch (_currentDirection)
         {
             case Direction.Up:
-                PositionY = (PositionY > 0) ? PositionY - 1 : height - 1;
-                break;
+                nextY = (PositionY - 1 + height) % height; break;
             case Direction.Down:
-                PositionY = (PositionY + 1) % height;
-                break;
+                nextY = (PositionY + 1) % height; break;
             case Direction.Left:
-                PositionX = (PositionX > 0) ? PositionX - 1 : width - 1;
-                break;
+                nextX = (PositionX - 1 + width) % width; break;
             case Direction.Right:
-                PositionX = (PositionX +1 ) % width;
-                break;
+                nextX = (PositionX + 1) % width; break;
         }
+
+        // Move head
+        PositionX = nextX;
+        PositionY = nextY;
+
+        // update body
+        _bodyPositions.Enqueue((PositionX, PositionY));
+        if (_bodyPositions.Count > _length) _bodyPositions.Dequeue();
     }
 
     public void HandleInput()
@@ -65,36 +70,18 @@ public class Player
             switch (key)
             {
                 case ConsoleKey.UpArrow:
-                    ChangeDirection(Direction.Up);
+                    if (_currentDirection != Direction.Down) _currentDirection = Direction.Up;
                     break;
                 case ConsoleKey.DownArrow:
-                    ChangeDirection(Direction.Down);
+                    if (_currentDirection != Direction.Up) _currentDirection = Direction.Down;
                     break;
                 case ConsoleKey.LeftArrow:
-                    ChangeDirection(Direction.Left);
+                    if (_currentDirection != Direction.Right) _currentDirection = Direction.Left;
                     break;
                 case ConsoleKey.RightArrow:
-                    ChangeDirection(Direction.Right);
+                    if(_currentDirection != Direction.Left) _currentDirection = Direction.Right;
                     break;
             }
         }
     }
 }   
-//public void HandleInput(int Width, int Height)
-//{
-//    if (Console.KeyAvailable)
-//    {
-//        var key = Console.ReadKey(true).Key;
-//        switch (key)
-//        {
-//            case ConsoleKey.UpArrow:
-//                MoveVertically(-1, Height); // Move up
-//                break;
-//            case ConsoleKey.DownArrow:
-//                MoveVertically(1, Height);
-//                break;
-//            case ConsoleKey.LeftArrow:
-//                Move(-1, Width);
-//        }
-//    }
-//}

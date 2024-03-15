@@ -6,7 +6,9 @@
         {
             var player = new Player();
             var board = new Board();
-            //var food = new Food();
+            var food = new Food();
+
+            Console.CursorVisible = false;
 
 
 
@@ -19,9 +21,12 @@
             while (true)
             {
                 Console.Clear();
+                food.SpawnFood();
+
                 //food.Show(Width, Height);
                 player.HandleInput();
-                player.Show(board.Width, board.Height);
+                player.Move(Console.WindowWidth, Console.WindowHeight);
+                player.Show();
                 Thread.Sleep(100);
 
             }
