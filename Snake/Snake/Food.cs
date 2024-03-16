@@ -18,8 +18,10 @@ public class Food
 
     public void SpawnFood()
     {
-        PositionX = _random.Next(Console.WindowWidth);
-        PositionY = _random.Next(Console.WindowHeight);
+        //PositionX = _random.Next(Console.WindowWidth);
+        //PositionY = _random.Next(Console.WindowHeight);
+        PositionX = 30;
+        PositionY = 10;
         Console.SetCursorPosition(PositionX, PositionY);
         Console.Write(Form);
     }

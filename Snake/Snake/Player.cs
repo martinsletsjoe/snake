@@ -8,7 +8,7 @@ public class Player
     public int PositionY;
     public int PositionX;
     private int _length;
-    private Direction _currentDirection;
+    public Direction CurrentDirection;
     private Queue<(int, int)> _bodyPositions;
 
     public Player()
@@ -17,7 +17,7 @@ public class Player
         PositionY = 20;
         _head = '0';
         _length = 2;
-        _currentDirection = Direction.Right;
+        CurrentDirection = Direction.Right;
         _bodyPositions = new Queue<(int, int)>();
 
         for (int i = 0; i < _length; i++)
@@ -41,7 +41,7 @@ public class Player
     public void Move(int width, int height)
     {
         int nextX = PositionX, nextY = PositionY;
-        switch (_currentDirection)
+        switch (CurrentDirection)
         {
             case Direction.Up:
                 nextY = (PositionY - 1 + height) % height; break;
@@ -70,16 +70,16 @@ public class Player
             switch (key)
             {
                 case ConsoleKey.UpArrow:
-                    if (_currentDirection != Direction.Down) _currentDirection = Direction.Up;
+                    if (CurrentDirection != Direction.Down) CurrentDirection = Direction.Up;
                     break;
                 case ConsoleKey.DownArrow:
-                    if (_currentDirection != Direction.Up) _currentDirection = Direction.Down;
+                    if (CurrentDirection != Direction.Up) CurrentDirection = Direction.Down;
                     break;
                 case ConsoleKey.LeftArrow:
-                    if (_currentDirection != Direction.Right) _currentDirection = Direction.Left;
+                    if (CurrentDirection != Direction.Right) CurrentDirection = Direction.Left;
                     break;
                 case ConsoleKey.RightArrow:
-                    if(_currentDirection != Direction.Left) _currentDirection = Direction.Right;
+                    if(CurrentDirection != Direction.Left) CurrentDirection = Direction.Right;
                     break;
             }
         }

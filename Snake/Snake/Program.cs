@@ -11,7 +11,8 @@
             Console.CursorVisible = false;
 
 
-
+            int sleepTimeHorizontal = 100;
+            int sleepTimeVertical = 200;
 
 
             Console.SetWindowSize(board.Width, board.Height);
@@ -27,8 +28,15 @@
                 player.HandleInput();
                 player.Move(Console.WindowWidth, Console.WindowHeight);
                 player.Show();
-                Thread.Sleep(100);
 
+                if (player.CurrentDirection == Direction.Up || player.CurrentDirection == Direction.Down)
+                {
+                    Thread.Sleep(sleepTimeVertical);
+                }
+                else
+                {
+                    Thread.Sleep(sleepTimeHorizontal);
+                }
             }
 
         }
