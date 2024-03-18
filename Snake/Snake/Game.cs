@@ -28,11 +28,11 @@ public class Game
         while (true)
         {
             Console.Clear();
+            Console.WriteLine(_score);
 
             if (food.PositionX == player.PositionX && food.PositionY == player.PositionY)
             {
-                Console.WriteLine("food eaten!");
-
+                _score++;
                 food.relocate();
             }
 
