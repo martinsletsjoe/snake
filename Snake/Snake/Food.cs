@@ -8,20 +8,22 @@ public class Food
     private Random _random;
 
 
-    public Food()
+    public Food(int x, int y)
     {
         Form = 'M';
-        PositionX = 18;
-        PositionY = 14;
+        PositionX = x;
+        PositionY = y;
         _random = new Random();
     }
 
-    public void SpawnFood()
+    public void relocate()
     {
-        //PositionX = _random.Next(Console.WindowWidth);
-        //PositionY = _random.Next(Console.WindowHeight);
-        PositionX = 30;
-        PositionY = 10;
+        PositionX = _random.Next(Console.WindowWidth);
+        PositionY = _random.Next(Console.WindowHeight);
+    }
+
+    public void Show()
+    {
         Console.SetCursorPosition(PositionX, PositionY);
         Console.Write(Form);
     }

@@ -5,16 +5,16 @@ namespace Snake;
 public class Player
 {
     private readonly char _head;
-    public int PositionY;
-    public int PositionX;
+    public int PositionY { get; set; }
+    public int PositionX { get; set; }
     private int _length;
     public Direction CurrentDirection;
     private Queue<(int, int)> _bodyPositions;
 
     public Player()
     {
-        PositionX = 20;
-        PositionY = 20;
+        PositionX = 10;
+        PositionY = 10;
         _head = '0';
         _length = 2;
         CurrentDirection = Direction.Right;
