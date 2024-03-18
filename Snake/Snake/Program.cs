@@ -12,7 +12,6 @@
             //var board = new Board();
             //var food = new Food();
 
-            //Console.CursorVisible = false;
 
 
             //int sleepTimeHorizontal = 100;

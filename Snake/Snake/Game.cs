@@ -25,15 +25,21 @@ public class Game
         // Ensure the buffer size is at least as large as the window size to avoid scrolls.
         Console.SetBufferSize(board.Width, board.Height); // This line is added to adjust the buffer size.
 
+        Console.CursorVisible = false;
+
+
         while (true)
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(_score);
+            Console.ForegroundColor = ConsoleColor.White;
 
             if (food.PositionX == player.PositionX && food.PositionY == player.PositionY)
             {
                 _score++;
                 food.relocate();
+                player._length++;
             }
 
             food.Show();
